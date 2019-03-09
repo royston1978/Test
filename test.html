@@ -1,17 +1,16 @@
-<!doctype html>
 <html>
 <head>
-    <title>Test FB Share?</title>
+    <title>Test FB Share</title>
     <meta charset="utf-8">
     <meta property="fb:app_id" content="882186168794080" />
     <meta property="og:url" content="https://www.cpf.gov.sg">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="test 0">
-    <meta property="og:description" content="test 00">
-    <meta property="og:image" content="http://drib.tech/fbsharetest/quiz_landing.jpg">
+    <meta property="og:title" content="Default Title">
+    <meta property="og:description" content="Default Description">
+    <meta property="og:image" content="https://www.cpf.gov.sg/Members/_catalogs/masterpage/CPFB/Images/cpf_logo_icon.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <script src="https://connect.facebook.net/en_US/sdk.js?hash=d48f502650aa6a75acec1cb67f9f54ef&amp;ua=modern_es6" async="" crossorigin="anonymous"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
     <script id="facebook-jssdk" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script>
             window.fbAsyncInit = function() {
@@ -34,68 +33,88 @@
     </script>
 </head>
 <body>
-    <input type="button" value="Submit answer" onclick="javascript:submitAndShare();">
-
+    <div>
+        Share 'What is CPF LIFE?'<br />
+        <a style="border:none; cursor:pointer" onclick="javascript:submitAndShare(1);"><img src="https://www.cpf.gov.sg/members/_catalogs/masterpage/CPFB/Images/CPF-FB-Icon.jpg" /></a>
+    </div>
+    <br />
+    <div>
+        Share 'What should I look out for if I am buying a property for the first time?'<br />
+        <a style="border:none; cursor:pointer" onclick="javascript:submitAndShare(2);"><img src="https://www.cpf.gov.sg/members/_catalogs/masterpage/CPFB/Images/CPF-FB-Icon.jpg" /></a>
+    </div>
+    <br />
+    <div>
+        Share 'How can I check on the number of discounted Singtel shares that I am holding?'<br />
+        <a style="border:none; cursor:pointer" onclick="javascript:submitAndShare(3);"><img src="https://www.cpf.gov.sg/members/_catalogs/masterpage/CPFB/Images/CPF-FB-Icon.jpg" /></a>
+    </div>
 
     <script>
-function submitAndShare()
-{
-    var val = 'Tiberius';
+        function submitAndShare(val) {
+            var title = '';
+            var description = '';
+            var image = '';
+            var url = '';
+            switch (val) {
+                case '1':
+                    title = 'What is CPF LIFE?';
+                    description = 'The CPF Lifelong Income For The Elderly (CPF LIFE) is an annuity scheme that provides you with a monthly payout for as long as you live. Your retirement sum will be used to buy CPF LIFE.';
+                    image = 'https://www.cpf.gov.sg/Members/_catalogs/masterpage/CPFB/Images/cpf_logo_icon.png';
+                    url = 'https://www.cpf.gov.sg/Members/Faq/schemes/Retirement/CPF-LIFE?ajsrc=Homepage&#faq2186326';
+                    break;
+                case '2':
+                    title = 'What should I look out for if I am buying a property for the first time?';
+                    description = 'If you are buying a property for the first time, these are the 3 general things you may wish to know before buying your first home.';
+                    image = 'https://www.cpf.gov.sg/Members/_catalogs/masterpage/CPFB/Images/cpf_logo_icon.png';
+                    url = 'https://www.cpf.gov.sg/Members/Faq/schemes/Housing/Housing-Scheme?ajsrc=Homepage&#faq2185328';
+                    break;
+                case '3':
+                    title = 'How can I check on the number of discounted Singtel shares that I am holding?';
+                    description = 'To check your discounted Singtel shareholdings, you can login to the CPF website to access via my cpf Online Services - My Statement using your SingPass.';
+                    image = 'https://www.cpf.gov.sg/Members/_catalogs/masterpage/CPFB/Images/cpf_logo_icon.png';
+                    break;
+                default:
+                    title = 'CPF Board';
+                    description = 'Some description for CPF Board';
+                    image = 'https://www.cpf.gov.sg/Members/_catalogs/masterpage/CPFB/Images/cpf_logo_icon.png';
+                    url = 'https://www.cpf.gov.sg/Members/Faq/schemes/Optimising-My-CPF/CPF-Investment-Schemes?ajsrc=Homepage&#faq2185184';
+                    break;
+            }
 
-    var title = '';
-	var description = '';
-	var image = '';
-	switch(val)
-	{
-		case 'Tiberius':
-				title = 'test 1';
-				description = 'test 11';
-				image = 'http://drib.tech/fbsharetest/quiz_yoda.jpg';
-			break;
-		default:
-				title = 'test 2';
-				description = 'test 22';
-				image = 'http://drib.tech/fbsharetest/quiz_jar_jar_binks.jpg';
-			break;
-	}
+            shareOverrideOGMeta(url,
+                title,
+                description,
+                image);
+        }
 
-	shareOverrideOGMeta(window.location.href,
-						title,
-						description,
-						image);
-}
+        function shareOverrideOGMeta(overrideLink, overrideTitle, overrideDescription, overrideImage) {
+            FB.ui({
+                method: 'share_open_graph',
+                action_type: 'og.likes',
+                action_properties: JSON.stringify({
+                    object: {
+                        'og:url': overrideLink,
+                        'og:title': overrideTitle,
+                        'og:description': overrideDescription,
+                        'og:image': overrideImage
+                    }
+                })
+            },
+                function (response) {
+                    // Action after response
+                });
+        }
 
-function shareOverrideOGMeta(overrideLink, overrideTitle, overrideDescription, overrideImage)
-{
-	FB.ui({
-		method: 'share_open_graph',
-		action_type: 'og.likes',
-		action_properties: JSON.stringify({
-			object: {
-				'og:url': overrideLink,
-				'og:title': overrideTitle,
-				'og:description': overrideDescription,
-				'og:image': overrideImage
-			}
-		})
-	},
-	function (response) {
-	// Action after response
-	});
-}
+        function shareOriginal() {
+            FB.ui({
+                method: 'share',
+                href: window.location.href
+            },
+                function (response) {
+                    // Action after response
+                });
 
-function shareOriginal()
-{
-	FB.ui({
-		method: 'share',
-		href: window.location.href
-	},
-	function (response) {
-	// Action after response
-	});
-
-	return false;
-}
+            return false;
+        }
 
     </script>
 </body>
