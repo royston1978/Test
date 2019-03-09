@@ -5,10 +5,17 @@
         .faq_class {
                 padding: 40px 20px 40px 20px;
         }
+        #workspace1 {
+            overflow: auto;
+            position: relative;
+        }
     </style>
 </head>
 <body>
-    <div id="s4-workspace" style="height: 264px; width: 1366px;">
+    <div id="workspace1">
+        <div style="height:500px">
+            &nbsp;
+        </div>
         <div id="faq1" class="faq_class">
             Q. What is CPF Life?
         </div>
@@ -39,17 +46,18 @@
                     var element = document.getElementById(id);
                     if (element != null) {
                         var rect = element.getBoundingClientRect();
-                        $('#s4-workspace').scrollTop($('#s4-workspace').scrollTop() + rect.top);
+                        $('#workspace1').scrollTop($('#workspace1').scrollTop() + rect.top);
+                       
                     }
                 }, 500);
         }
- 
+
         $(document).ready(function () {
             var og_title = "CPF Board";
             var og_description = "Description for CPF Board";
 
-            var ele = getHash();
- 
+            //var ele = getHash();
+            var ele = "faq3";
             switch (ele) {
                 case "faq1":
                     og_title = "What is CPF Life?";
@@ -67,7 +75,7 @@
             Add_MetaOG("og:title", og_title);
             Add_MetaOG("og:description", og_description);
             Add_MetaOG("og:image", "https://www.cpf.gov.sg/Members/_catalogs/masterpage/CPFB/Images/cpf_logo_icon.png");
-
+           
             NavigateToId(ele);
         })
     </script>
