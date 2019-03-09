@@ -1,83 +1,102 @@
+<!doctype html>
 <html>
 <head>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <style>
-        .faq_class {
-                padding: 40px 20px 40px 20px;
-        }
-        #workspace1 {
-            overflow: auto;
-            position: relative;
-        }
-    </style>
+    <title>Test FB Share?</title>
+    <meta charset="utf-8">
+    <meta property="fb:app_id" content="124285848214697" />
+    <meta property="og:url" content="https://www.cpf.gov.sg">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="test 0">
+    <meta property="og:description" content="test 00">
+    <meta property="og:image" content="http://drib.tech/fbsharetest/quiz_landing.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <script src="https://connect.facebook.net/en_US/sdk.js?hash=d48f502650aa6a75acec1cb67f9f54ef&amp;ua=modern_es6" async="" crossorigin="anonymous"></script>
+    <script id="facebook-jssdk" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script>
+            window.fbAsyncInit = function() {
+                FB.init({
+                    appId: '124285848214697',
+                    autoLogAppEvents: true,
+                    xfbml: true,
+                    version: 'v2.10'
+                });
+            FB.AppEvents.logPageView();
+          };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return ;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
+    </script>
 </head>
 <body>
-    <div id="workspace1">
-        <div style="height:500px">
-            &nbsp;
-        </div>
-        <div id="faq1" class="faq_class">
-            Q. What is CPF Life?
-        </div>
-        <div id="faq2" class="faq_class">
-            Q. Do I have to join CPF LIFE? 
-        </div>
-        <div id="faq3" class="faq_class">
-            Q. How are CPF LIFE monies invested and managed?
-        </div>
-    </div>
-    <script type="text/javascript">
-        function Add_MetaOG(property, content) {
-            var meta = document.createElement('meta');
-            meta.setAttribute("property", property);
-            meta.content = content;
-            document.getElementsByTagName('head')[0].appendChild(meta);
-        }
+    <input type="button" value="Submit answer" onclick="javascript:submitAndShare();">
 
-        function getHash() {
-            var ele = null;
-            if (location.hash.length > 0) {
-                ele = location.hash.split('#')[1];
-            }
-            return ele;
-        }
-        function NavigateToId(id) {
-                setTimeout(function () {
-                    var element = document.getElementById(id);
-                    if (element != null) {
-                        var rect = element.getBoundingClientRect();
-                        $('#workspace1').scrollTop($('#workspace1').scrollTop() + rect.top);
-                       
-                    }
-                }, 500);
-        }
 
-        $(document).ready(function () {
-            var og_title = "CPF Board";
-            var og_description = "Description for CPF Board";
+    <script>
+function submitAndShare()
+{
+    var val = 'Tiberius';
 
-            //var ele = getHash();
-            var ele = "faq3";
-            switch (ele) {
-                case "faq1":
-                    og_title = "What is CPF Life?";
-                    og_description = "Description for 'What is CPF Life?'";
-                    break;
-                case "faq2":
-                    og_title = "Do I have to join CPF LIFE?";
-                    og_description = "Description for 'Do I have to join CPF LIFE?'";
-                    break;
-                case "faq3":
-                    og_title = "How are CPF LIFE monies invested and managed?";
-                    og_description = "Description for 'How are CPF LIFE monies invested and managed?'";
-                    break;
-            }
-            Add_MetaOG("og:title", og_title);
-            Add_MetaOG("og:description", og_description);
-            Add_MetaOG("og:image", "https://www.cpf.gov.sg/Members/_catalogs/masterpage/CPFB/Images/cpf_logo_icon.png");
-           
-            NavigateToId(ele);
-        })
+    var title = '';
+	var description = '';
+	var image = '';
+	switch(val)
+	{
+		case 'Tiberius':
+				title = 'test 1';
+				description = 'test 11';
+				image = 'http://drib.tech/fbsharetest/quiz_yoda.jpg';
+			break;
+		default:
+				title = 'test 2';
+				description = 'test 22';
+				image = 'http://drib.tech/fbsharetest/quiz_jar_jar_binks.jpg';
+			break;
+	}
+
+	shareOverrideOGMeta(window.location.href,
+						title,
+						description,
+						image);
+}
+
+function shareOverrideOGMeta(overrideLink, overrideTitle, overrideDescription, overrideImage)
+{
+	FB.ui({
+		method: 'share_open_graph',
+		action_type: 'og.likes',
+		action_properties: JSON.stringify({
+			object: {
+				'og:url': overrideLink,
+				'og:title': overrideTitle,
+				'og:description': overrideDescription,
+				'og:image': overrideImage
+			}
+		})
+	},
+	function (response) {
+	// Action after response
+	});
+}
+
+function shareOriginal()
+{
+	FB.ui({
+		method: 'share',
+		href: window.location.href
+	},
+	function (response) {
+	// Action after response
+	});
+
+	return false;
+}
+
     </script>
 </body>
 </html>
