@@ -1,66 +1,14 @@
 <html>
 <head>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js" />
-    <script type="text/javascript">
-
-        function Add_MetaOG(property, content) {
-            var meta = document.createElement('meta');
-            meta.setAttribute("property", property);
-            meta.content = content;
-            document.getElementsByTagName('head')[0].appendChild(meta);
-        }
-
-        function ScrollToAnchor() {
-            if (location.hash.length > 0) {
-                ele = location.hash.split('#')[1];
-
-                setTimeout(function () {
-                    var elements = document.getElementsByName(ele);
-                    if (elements != null && elements.length > 0) {
-                        var rect = elements[0].getBoundingClientRect();
-                        $('#s4-workspace').scrollTop($('#s4-workspace').scrollTop() + rect.top);
-                    }
-                }, 500);
-            }
-        }
-
-        $(document).ready(function () {
-            var og_title = "CPF Board";
-            var og_description = "Description for CPF Board";
-
-            if (location.hash.length > 0) {
-                ele = location.hash.split('#')[1];
-
-                switch (ele) {
-                    case "faq1":
-                        og_title = "What is CPF Life?";
-                        og_description = "Description for 'What is CPF Life?'";
-                        break;
-                    case "faq2":
-                        og_title = "Do I have to join CPF LIFE?";
-                        og_description = "Description for 'Do I have to join CPF LIFE?'";
-                        break;
-                    case "faq3":
-                        og_title = "How are CPF LIFE monies invested and managed?";
-                        og_description = "Description for 'How are CPF LIFE monies invested and managed?'";
-                        break;
-                }
-            }
-            Add_MetaOG("og:title", og_title);
-            Add_MetaOG("og:description", og_description);
-            Add_MetaOG("og:image", "https://www.cpf.gov.sg/Members/_catalogs/masterpage/CPFB/Images/cpf_logo_icon.png");
-
-            ScrollToAnchor();
-        })
-    </script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <style>
         .faq_class {
-                padding: 100px 100px 100px 100px;
+                padding: 40px 20px 40px 20px;
         }
     </style>
 </head>
 <body>
-    <div id="s4-workspace">
+    <div id="s4-workspace" style="height: 264px; width: 1366px;">
         <div id="faq1" class="faq_class">
             Q. What is CPF Life?
         </div>
@@ -71,5 +19,57 @@
             Q. How are CPF LIFE monies invested and managed?
         </div>
     </div>
+    <script type="text/javascript">
+        function Add_MetaOG(property, content) {
+            var meta = document.createElement('meta');
+            meta.setAttribute("property", property);
+            meta.content = content;
+            document.getElementsByTagName('head')[0].appendChild(meta);
+        }
+
+        function getHash() {
+            var ele = null;
+            if (location.hash.length > 0) {
+                ele = location.hash.split('#')[1];
+            }
+            return ele;
+        }
+        function NavigateToId(id) {
+                setTimeout(function () {
+                    var element = document.getElementById(id);
+                    if (element != null) {
+                        var rect = element.getBoundingClientRect();
+                        $('#s4-workspace').scrollTop($('#s4-workspace').scrollTop() + rect.top);
+                    }
+                }, 500);
+        }
+ 
+        $(document).ready(function () {
+            var og_title = "CPF Board";
+            var og_description = "Description for CPF Board";
+
+            var ele = getHash();
+ 
+            switch (ele) {
+                case "faq1":
+                    og_title = "What is CPF Life?";
+                    og_description = "Description for 'What is CPF Life?'";
+                    break;
+                case "faq2":
+                    og_title = "Do I have to join CPF LIFE?";
+                    og_description = "Description for 'Do I have to join CPF LIFE?'";
+                    break;
+                case "faq3":
+                    og_title = "How are CPF LIFE monies invested and managed?";
+                    og_description = "Description for 'How are CPF LIFE monies invested and managed?'";
+                    break;
+            }
+            Add_MetaOG("og:title", og_title);
+            Add_MetaOG("og:description", og_description);
+            Add_MetaOG("og:image", "https://www.cpf.gov.sg/Members/_catalogs/masterpage/CPFB/Images/cpf_logo_icon.png");
+
+            NavigateToId(ele);
+        })
+    </script>
 </body>
 </html>
