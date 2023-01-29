@@ -1,0 +1,4 @@
+.cmp-scrollytelling{position:relative;padding:0 !important}
+.cmp-scrollytelling-animation{position:static;height:100vh}
+.cmp-scrollytelling-animation__background{background-size:cover;background-repeat:no-repeat;background-position:center}
+/*.cmp-scrollytelling-animation__show-scroll{overflow-y:visible}*/
