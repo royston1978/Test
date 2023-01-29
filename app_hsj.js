@@ -45,13 +45,6 @@ const ScrollyTellingAnimation = (() => {
           }
       })
 
-      ScrollSmoother.create({
-
-        smooth: 2,   
-        effects: true,
-        smoothTouch: 0.1,  
-      });
-
       const timeObj = { currentFrame: 0 };
       ScrollTrigger.create({
           trigger: obj.target,
