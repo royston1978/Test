@@ -142,7 +142,7 @@ const ScrollyTellingAnimation = (() => {
   const init = () => {
       if (!$(".cmp-scrollytelling-animation").length) return;
 
-      gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+      gsap.registerPlugin(ScrollTrigger);
       //ScrollTrigger.normalizeScroll(true);
       //ScrollTrigger.config({ ignoreMobileResize: true });
 
